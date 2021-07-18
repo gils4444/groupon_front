@@ -1,0 +1,35 @@
+html,body,#root{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    color: black;
+}
+
+.Box{
+    display: inline-block;
+    text-align: center;
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
+a{
+    color: black;
+    text-decoration-line: none;
+}
+
+
+.Scroller{
+    overflow: auto;
+    height: 85vh;
+}
+
+.Card{
+    display: inline-block;
+    text-align: center;
+    border: 1px solid black;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px;
+    width: 150px;
+}

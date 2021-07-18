@@ -1,0 +1,11 @@
+.AddCustomer {
+	
+}
+
+.AddCustomer > .Card{
+    width: fit-content;
+}
+
+.AddCustomer input{
+    display: flex;
+ }

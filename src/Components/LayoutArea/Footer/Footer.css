@@ -1,0 +1,16 @@
+.Footer {
+    display: inline-block;
+}
+
+.Footer>span {
+    display: inline-block;
+    position: absolute;
+    left: 1%;
+    bottom: 1%;
+}
+.Footer> .copy {
+    display: inline-block;
+    position: absolute;
+    right: 1%;
+    bottom: 1%;
+}

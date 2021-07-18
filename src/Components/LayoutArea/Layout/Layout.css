@@ -1,0 +1,15 @@
+.Layout {
+    height: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 10% 85% 5%;
+    text-align: center;
+    background-image: url(../../../Assets/Background/pineapple\(2\).jpg); 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* .Layout>* {
+    border: 1px solid black;
+} */

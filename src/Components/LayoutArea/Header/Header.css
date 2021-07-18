@@ -1,0 +1,16 @@
+.Header {
+    display: inline-block;
+}   
+
+.Header> .Login{
+    display: inline-block;
+    position: absolute;
+    left: 1%;
+    top: 1%;
+}
+.Header> .MyArea{
+    display: inline-block;
+    position: absolute;
+    right: 1%;
+    top: 1%;
+}

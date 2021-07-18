@@ -1,0 +1,10 @@
+
+.AdminDisplay >.hr {
+        border:none;
+        border-top:5px dotted rgb(133, 124, 124);
+        color:#fff;
+        background-color:#fff;
+        height:1px;
+        width:40px;
+      
+}
