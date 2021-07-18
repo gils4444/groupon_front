@@ -2,7 +2,6 @@
 class Globals {
 
 }
-//blabla hey
 //Globals settings which are suitable only for development
 class DevelopmentGlobals extends Globals {
     public urls = {
