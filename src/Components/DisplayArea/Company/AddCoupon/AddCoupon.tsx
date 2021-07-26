@@ -53,23 +53,28 @@ function AddCoupon(): JSX.Element {
      */
     async function send(coupon: CouponModel) {
         try {
-            const myFormData = new FormData();
-
+            
             const imgBBFormData = new FormData();
             imgBBFormData.append("image", coupon.image.item(0))
-            imgBBFormData.set("key", "531f96433eff28c617e0d67c73f5ae9b")
-
+            imgBBFormData.set("key", "8ff33cec1f9ce459253c24cb2e87e5cf")
             let imgResponse = await axios.post("https://api.imgbb.com/1/upload", imgBBFormData);
-
             let imgResponseURL = imgResponse.data["data"]["display_url"]
 
+            console.log("imgResponseURL "+imgResponseURL);
+            console.log("StartDate "+ coupon.startDate);
+            console.log("EndDate "+ coupon.endDate);
+            console.log("stringStartDate "+ new Date(coupon.startDate).toISOString().split("T")[0]);
+            console.log("stringEndDate "+ new Date(coupon.endDate).toISOString().split("T")[0]);
+            
+            
+            const myFormData = new FormData();
             myFormData.append("amount", coupon.amount.toString());
             myFormData.append("category", coupon.category.toString());
             myFormData.append("description", coupon.description);
-            myFormData.append("endDate", new Date(coupon.endDate).toISOString().split("T")[0]);
+            myFormData.append("stringEndDate", new Date(coupon.endDate).toISOString().split("T")[0]);
 
             myFormData.append("price", coupon.price.toString());
-            myFormData.append("startDate", new Date(coupon.startDate).toISOString().split("T")[0]);
+            myFormData.append("stringStartDate", new Date(coupon.startDate).toISOString().split("T")[0]);
             myFormData.append("title", coupon.title);
             myFormData.append("imageName", imgResponseURL);
 

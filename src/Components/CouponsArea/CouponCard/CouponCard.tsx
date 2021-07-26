@@ -90,8 +90,9 @@ function CouponCard(props: CouponCardProps): JSX.Element {
     return (
         <div className="CouponCard">
             {showCoupon &&
-
+                
                 <Card key={props.coupon.id} className={classes.cardStyle} >
+                    
                     <NavLink key={props.coupon.id} to={"/coupons/full-details/" + props.coupon.id.toString()}>
                         {props.coupon.imageName !== "no_image" &&
                             <CardMedia
