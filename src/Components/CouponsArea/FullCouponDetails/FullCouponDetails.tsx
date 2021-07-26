@@ -165,8 +165,7 @@ function FullCouponDetails(props: FullCouponDetailsProps): JSX.Element {
                     {coupon.imageName !== "no_image" &&
                         <CardMedia
                             className={classes.media}
-                            image={globals.urls.images +
-                                coupon.imageName}
+                            image={coupon.imageName}
                         />
                     }
                     <CardHeader className={classes.title} title={coupon.title} subheader={niceString(coupon.category)} />

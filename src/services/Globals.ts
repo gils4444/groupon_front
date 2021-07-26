@@ -54,7 +54,6 @@ class ProductionGlobals extends Globals {
     public urls = {
         categoryCoupons: this.myURL+ "/Guest/get/coupons/category/",
         login:this.myURL+"/login",
-        images:this.myURL+"/",
 
         //
         // Admin Area

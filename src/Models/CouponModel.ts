@@ -14,8 +14,8 @@ class CouponModel{
     public amount: number;
     public price:number;
     public image:FileList;
-    public company:CompanyModel;
     public imageName: string;
+    public company:CompanyModel;
     public token: string;
 }
 

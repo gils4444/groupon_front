@@ -12,6 +12,7 @@ import jwtAxios from "../../../../services/JwtAxios";
 import notify from "../../../../services/Notifications";
 import "./AddCoupon.css";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,6 +55,14 @@ function AddCoupon(): JSX.Element {
         try {
             const myFormData = new FormData();
 
+            const imgBBFormData = new FormData();
+            imgBBFormData.append("image", coupon.image.item(0))
+            imgBBFormData.set("key", "531f96433eff28c617e0d67c73f5ae9b")
+
+            let imgResponse = await axios.post("https://api.imgbb.com/1/upload", imgBBFormData);
+
+            let imgResponseURL = imgResponse.data["data"]["display_url"]
+
             myFormData.append("amount", coupon.amount.toString());
             myFormData.append("category", coupon.category.toString());
             myFormData.append("description", coupon.description);
@@ -62,7 +71,7 @@ function AddCoupon(): JSX.Element {
             myFormData.append("price", coupon.price.toString());
             myFormData.append("startDate", new Date(coupon.startDate).toISOString().split("T")[0]);
             myFormData.append("title", coupon.title);
-            myFormData.append("image", coupon.image.item(0));
+            myFormData.append("imageName", imgResponseURL);
 
 
             let response = await jwtAxios.post<CouponModel>(globals.urls.addCoupon, myFormData);

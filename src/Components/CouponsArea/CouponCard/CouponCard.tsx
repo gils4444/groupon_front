@@ -86,7 +86,7 @@ function CouponCard(props: CouponCardProps): JSX.Element {
         return false;
 
     }
-
+    let img1 = "https://firebasestorage.googleapis.com/v0/b/coupon-images-a46e8.appspot.com/o/dog.jfif?alt=media&token=c0a4011e-d3fd-44e6-badb-918e1106f4e2"
     return (
         <div className="CouponCard">
             {showCoupon &&
@@ -96,8 +96,7 @@ function CouponCard(props: CouponCardProps): JSX.Element {
                         {props.coupon.imageName !== "no_image" &&
                             <CardMedia
                                 className={classes.media}
-                                image={globals.urls.images +
-                                    props.coupon.imageName}
+                                image={props.coupon.imageName}
                             />
                         }
 
