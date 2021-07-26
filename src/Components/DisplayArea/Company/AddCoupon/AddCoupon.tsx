@@ -60,13 +60,6 @@ function AddCoupon(): JSX.Element {
             let imgResponse = await axios.post("https://api.imgbb.com/1/upload", imgBBFormData);
             let imgResponseURL = imgResponse.data["data"]["display_url"]
 
-            console.log("imgResponseURL "+imgResponseURL);
-            console.log("StartDate "+ coupon.startDate);
-            console.log("EndDate "+ coupon.endDate);
-            console.log("stringStartDate "+ new Date(coupon.startDate).toISOString().split("T")[0]);
-            console.log("stringEndDate "+ new Date(coupon.endDate).toISOString().split("T")[0]);
-            
-            
             const myFormData = new FormData();
             myFormData.append("amount", coupon.amount.toString());
             myFormData.append("category", coupon.category.toString());

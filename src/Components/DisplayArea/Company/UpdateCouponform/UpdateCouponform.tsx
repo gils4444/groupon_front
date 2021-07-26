@@ -12,6 +12,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import jwtAxios from "../../../../services/JwtAxios";
 import notify from "../../../../services/Notifications";
 import "./UpdateCouponform.css";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     dates: {
@@ -68,34 +69,14 @@ function UpdateCouponform(props: UpdateCouponformProps): JSX.Element {
      * @param couponToUpdate 
      */
     const checkChanges = (couponToUpdate: CouponModel) => {
-
-        if (!couponToUpdate.title?.trim()) {
-            couponToUpdate.title = coupon.title
-        }
-        if (!couponToUpdate.category) {
-            couponToUpdate.category = coupon.category
-        }
-        if (!couponToUpdate.description) {
-            couponToUpdate.description = coupon.description
-        }
-        if (!couponToUpdate.startDate) {
-            couponToUpdate.startDate = coupon.startDate
-        }
-        if (!couponToUpdate.endDate) {
-            console.log(coupon.endDate);
-            
-            couponToUpdate.endDate = coupon.endDate
-        }
-        if (!couponToUpdate.amount) {
-            couponToUpdate.amount = coupon.amount
-        }
-        if (!couponToUpdate.price) {
-            couponToUpdate.price = coupon.price
-        }
-        if (!couponToUpdate.image.item(0)) {
-            couponToUpdate.imageName = coupon.imageName
-        }
-
+        if (!couponToUpdate.title?.trim()) { couponToUpdate.title = coupon.title}
+        if (!couponToUpdate.category) {couponToUpdate.category = coupon.category}
+        if (!couponToUpdate.description) {couponToUpdate.description = coupon.description}
+        if (!couponToUpdate.startDate) {couponToUpdate.startDate = coupon.startDate}
+        if (!couponToUpdate.endDate) {couponToUpdate.endDate = coupon.endDate}
+        if (!couponToUpdate.amount) {couponToUpdate.amount = coupon.amount}
+        if (!couponToUpdate.price) {couponToUpdate.price = coupon.price}
+        if (!couponToUpdate.image.item(0)) {couponToUpdate.imageName = coupon.imageName}
     }
 
     /**
@@ -129,6 +110,11 @@ function UpdateCouponform(props: UpdateCouponformProps): JSX.Element {
                 couponToUpdate.id = coupon.id;
                 couponToUpdate.company = coupon.company;
 
+                const imgBBFormData = new FormData();
+                imgBBFormData.append("image", couponToUpdate.image.item(0))
+                imgBBFormData.set("key", "8ff33cec1f9ce459253c24cb2e87e5cf")
+                let imgResponse = await axios.post("https://api.imgbb.com/1/upload", imgBBFormData);
+                let imgResponseURL = imgResponse.data["data"]["display_url"]
 
                 const myFormData = new FormData();
 
@@ -136,11 +122,11 @@ function UpdateCouponform(props: UpdateCouponformProps): JSX.Element {
                 myFormData.append("amount", couponToUpdate.amount.toString());
                 myFormData.append("category", couponToUpdate.category.toString());
                 myFormData.append("description", couponToUpdate.description);
-                myFormData.append("endDate", new Date(couponToUpdate.endDate).toISOString().split("T")[0]);
+                myFormData.append("stringEndDate", new Date(couponToUpdate.endDate).toISOString().split("T")[0]);
                 myFormData.append("price", couponToUpdate.price.toString());
-                myFormData.append("startDate", new Date(couponToUpdate.startDate).toISOString().split("T")[0]);
+                myFormData.append("stringStartDate", new Date(couponToUpdate.startDate).toISOString().split("T")[0]);
                 myFormData.append("title", couponToUpdate.title);
-                myFormData.append("image", couponToUpdate.image.item(0));
+                myFormData.append("imageName", imgResponseURL);
 
                 let response = await jwtAxios.put<CouponModel>(globals.urls.updateCoupon, myFormData);
                 let updatedCoupon = response.data;
