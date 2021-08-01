@@ -96,7 +96,8 @@ function FullCouponDetails(props: FullCouponDetailsProps): JSX.Element {
     //Gives the user vague amount of the selected coupon 
     const showAmount = (): string => {
         let answer = "No coupons left ";
-        if (coupon.amount >= 50) {
+        if (store.getState().authState.user.id === coupon.company.id) { answer = coupon.amount.toString() }
+        else if (coupon.amount >= 50) {
             answer = "More than 50 coupons are available";
         }
         else if (coupon.amount < 50 && coupon.amount > 9) {

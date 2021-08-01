@@ -69,14 +69,14 @@ function UpdateCouponform(props: UpdateCouponformProps): JSX.Element {
      * @param couponToUpdate 
      */
     const checkChanges = (couponToUpdate: CouponModel) => {
-        if (!couponToUpdate.title?.trim()) { couponToUpdate.title = coupon.title}
-        if (!couponToUpdate.category) {couponToUpdate.category = coupon.category}
-        if (!couponToUpdate.description) {couponToUpdate.description = coupon.description}
-        if (!couponToUpdate.startDate) {couponToUpdate.startDate = coupon.startDate}
-        if (!couponToUpdate.endDate) {couponToUpdate.endDate = coupon.endDate}
-        if (!couponToUpdate.amount) {couponToUpdate.amount = coupon.amount}
-        if (!couponToUpdate.price) {couponToUpdate.price = coupon.price}
-        if (!couponToUpdate.image.item(0)) {couponToUpdate.imageName = coupon.imageName}
+        if (!couponToUpdate.title?.trim()) { couponToUpdate.title = coupon.title }
+        if (!couponToUpdate.category) { couponToUpdate.category = coupon.category }
+        if (!couponToUpdate.description) { couponToUpdate.description = coupon.description }
+        if (!couponToUpdate.startDate) { couponToUpdate.startDate = coupon.startDate }
+        if (!couponToUpdate.endDate) { couponToUpdate.endDate = coupon.endDate }
+        if (!couponToUpdate.amount) { couponToUpdate.amount = coupon.amount }
+        if (!couponToUpdate.price) { couponToUpdate.price = coupon.price }
+        if (!couponToUpdate.image.item(0)) { couponToUpdate.imageName = coupon.imageName }
     }
 
     /**
@@ -105,17 +105,21 @@ function UpdateCouponform(props: UpdateCouponformProps): JSX.Element {
     const handleUpdate = async (couponToUpdate: CouponModel) => {
         try {
             checkChanges(couponToUpdate)
-            
+
             if (validateDates(couponToUpdate)) {
                 couponToUpdate.id = coupon.id;
                 couponToUpdate.company = coupon.company;
 
-                const imgBBFormData = new FormData();
-                imgBBFormData.append("image", couponToUpdate.image.item(0))
-                imgBBFormData.set("key", "8ff33cec1f9ce459253c24cb2e87e5cf")
-                let imgResponse = await axios.post("https://api.imgbb.com/1/upload", imgBBFormData);
-                let imgResponseURL = imgResponse.data["data"]["display_url"]
-
+                let imgResponseURL = coupon.imageName
+                
+                // upload image to imgBB only if an image was uploaded on the updateCouponForm.
+                if (couponToUpdate.image?.item(0)) {
+                    const imgBBFormData = new FormData();
+                    imgBBFormData.append("image", couponToUpdate.image.item(0))
+                    imgBBFormData.set("key", "8ff33cec1f9ce459253c24cb2e87e5cf")
+                    let imgResponse = await axios.post("https://api.imgbb.com/1/upload", imgBBFormData);
+                    imgResponseURL = imgResponse.data["data"]["display_url"]
+                }
                 const myFormData = new FormData();
 
                 myFormData.append("id", couponToUpdate.id.toString());
